@@ -10,9 +10,9 @@ canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
 // Some constants
-const minRadius = 10;
-const maxRadius = 30;
-const numCircles = 100;
+const minRadius = 2;
+const maxRadius = 10;
+const numCircles = 400;
 
 // Circle class to creat more circle objects easily later
 class Circle {
