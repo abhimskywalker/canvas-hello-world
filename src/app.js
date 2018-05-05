@@ -16,9 +16,8 @@ class Circle {
         this.y = y;
         this.radius = radius;
         this.color = color;
-        // x velocity
+        // velocities:
         this.dx = dx;
-        // y velocity
         this.dy = dy;
     }
     update() {
@@ -46,12 +45,22 @@ class Circle {
     }
 }
 
+// Utility functions:
+function randomIntFromRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
 // define circle
 let circle;
 
 // Function to initiate and setup our starting canvas. This is called one time only as below at end of file
 function init() {
-    circle = new Circle(200, 200, 50, '#6af593', 3, 2);
+    let radius = randomIntFromRange(10, 30);
+    let x = randomIntFromRange(0 + radius, window.innerWidth - radius);
+    let y = randomIntFromRange(0 + radius, window.innerHeight - radius);
+    let dx = randomIntFromRange(-3, 3);
+    let dy = randomIntFromRange(-3, 3);
+    circle = new Circle(x, y, radius, '#6af593', dx, dy);
     circle.draw();
 }
 
