@@ -2,12 +2,16 @@ import './assets/scss/app.scss';
 console.log('Its working just fine');
 
 // Initial Setup
-const canvas = document.querySelector('canvas')
+const backgroundCanvas = document.querySelector('canvas#background')
+const canvas = document.querySelector('canvas#foreground')
 const c = canvas.getContext('2d')
+const b = backgroundCanvas.getContext('2d')
 
-// Make sure canvas occupies all of the visible space in browser window
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
+backgroundCanvas.width = innerWidth
+backgroundCanvas.height = innerHeight
+
+canvas.width = innerWidth
+canvas.height = innerHeight
 
 // Some constants
 const minRadius = 2;
