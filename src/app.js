@@ -9,6 +9,11 @@ const c = canvas.getContext('2d')
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
+// Some constants
+const minRadius = 10;
+const maxRadius = 30;
+const numCircles = 100;
+
 // Circle class to creat more circle objects easily later
 class Circle {
     constructor(x, y, radius, color, dx, dy) {
@@ -51,17 +56,20 @@ function randomIntFromRange(min, max) {
 }
 
 // define circle
-let circle;
+let circles;
 
 // Function to initiate and setup our starting canvas. This is called one time only as below at end of file
 function init() {
-    let radius = randomIntFromRange(10, 30);
-    let x = randomIntFromRange(0 + radius, window.innerWidth - radius);
-    let y = randomIntFromRange(0 + radius, window.innerHeight - radius);
-    let dx = randomIntFromRange(-3, 3);
-    let dy = randomIntFromRange(-3, 3);
-    circle = new Circle(x, y, radius, '#6af593', dx, dy);
-    circle.draw();
+    circles = []
+
+    for (let i = 0; i < numCircles; i++) {
+        let radius = randomIntFromRange(minRadius, maxRadius);
+        let x = randomIntFromRange(0 + radius, window.innerWidth - radius);
+        let y = randomIntFromRange(0 + radius, window.innerHeight - radius);
+        let dx = randomIntFromRange(-3, 3);
+        let dy = randomIntFromRange(-3, 3);
+        circles.push(new Circle(x, y, radius, '#6af593', dx, dy));
+    }
 }
 
 // Animation Loop
@@ -71,8 +79,11 @@ function animate() {
     // Next we clear the canvas to start fresh
     c.clearRect(0, 0, canvas.width, canvas.height)
 
-    // Next we update this circle on canvas (repeat draw code abstracted in update function of Circle class)
-    circle.update();
+    // for each circle we update it's position in next frame
+    circles.forEach(circle => {
+        circle.update();
+    });
+    
 }
 
 // Initiate setup of canvas
