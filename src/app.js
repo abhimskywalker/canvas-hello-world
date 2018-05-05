@@ -60,10 +60,6 @@ class Circle {
         this.dy = dy;
     }
     update() {
-        // // if circle's left end corsses right end of the window, we reset it to left of the left end window 
-        // if (this.x - this.radius > window.innerWidth) {
-        //     this.x = 0 - this.radius;
-        // }
         // Whenever circle touhces the end of window, it reverses their velocity
         if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
             this.dx = -this.dx;
@@ -100,6 +96,14 @@ class Cloud {
         this.dx = dx | 1;
         this.dy = dy;
         this.length = 350;
+    }
+    update() {
+        // if cloud's left end corsses right end of the window, we reset it to left of the left end of the window 
+        if (this.x - this.length > innerWidth) {
+            this.x = 0 - this.length;
+        }
+        this.x = this.x + this.dx;
+        this.draw();
     }
     draw() {
         b.beginPath();
@@ -141,8 +145,8 @@ function init() {
         let dy = randomIntFromRange(-3, 3) | 2;
         circles.push(new Circle(x, y, radius, randomColor(colors), dx, dy));
     }
-    cloud = new Cloud(window.innerWidth/2, window.innerHeight/2, cloudColors[1], 0);
-    cloud.draw();
+
+    cloud = new Cloud(window.innerWidth/2, window.innerHeight/2, cloudColors[1], 2);
 }
 
 // Animation Loop
@@ -151,10 +155,14 @@ function animate() {
     requestAnimationFrame(animate)
     // Next we clear the canvas to start fresh
     c.clearRect(0, 0, canvas.width, canvas.height);
+    b.clearRect(0, 0, backgroundCanvas.width, backgroundCanvas.height);
+
     // for each circle we update it's position in next frame
     circles.forEach(circle => {
         circle.update();
     });
+
+    cloud.update();
 
 }
 
