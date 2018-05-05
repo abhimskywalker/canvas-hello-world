@@ -26,6 +26,8 @@ const colors = [
     '#F0E6EF', // ISABELLINE
     '#B8BEDD' // LIGHT STEEL BLUE
 ]
+
+const numClouds = 5;
 const cloudColors = ["#E7F2F4", '#c8d1f3', '#A2D2DC']
 
 // Variables
@@ -131,7 +133,7 @@ function randomColor(colors) {
 
 // define circle
 let circles;
-let cloud;
+let clouds;
 
 // Function to initiate and setup our starting canvas. This is called one time only as below at end of file
 function init() {
@@ -146,7 +148,14 @@ function init() {
         circles.push(new Circle(x, y, radius, randomColor(colors), dx, dy));
     }
 
-    cloud = new Cloud(window.innerWidth/2, window.innerHeight/2, cloudColors[1], 2);
+    clouds = []
+
+    for (let i = 0; i < 6; i++) {
+        let x = Math.random() * innerWidth;
+        let y = Math.random() * innerHeight;
+        let dx = randomIntFromRange(2, 4);
+        clouds.push(new Cloud(x, y, randomColor(cloudColors), dx))
+    }
 }
 
 // Animation Loop
@@ -162,7 +171,9 @@ function animate() {
         circle.update();
     });
 
-    cloud.update();
+    clouds.forEach(cloud => {
+        cloud.update();
+    });
 
 }
 
