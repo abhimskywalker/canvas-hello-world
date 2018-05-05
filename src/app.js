@@ -16,8 +16,7 @@ canvas.height = innerHeight
 // Some constants
 const minRadius = 2;
 const maxRadius = 5;
-let numCircles = Math.floor(window.innerHeight / 2 + window.innerWidth / 2);
-console.log("numCircles", numCircles);
+let numCircles = Math.floor(window.innerHeight / 3 + window.innerWidth / 3);
 
 const colors = [
     '#9C89B8', //LAVENDER PURPLE
@@ -45,8 +44,7 @@ addEventListener('mousemove', event => {
 addEventListener('resize', () => {
     canvas.width = innerWidth
     canvas.height = innerHeight
-    numCircles = Math.floor(window.innerHeight / 2 + window.innerWidth / 2);
-    console.log("numCircles", numCircles);
+    numCircles = Math.floor(window.innerHeight / 3 + window.innerWidth / 3);
     init()
 })
 
