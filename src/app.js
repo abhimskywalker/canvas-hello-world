@@ -66,8 +66,8 @@ function init() {
         let radius = randomIntFromRange(minRadius, maxRadius);
         let x = randomIntFromRange(0 + radius, window.innerWidth - radius);
         let y = randomIntFromRange(0 + radius, window.innerHeight - radius);
-        let dx = randomIntFromRange(-3, 3);
-        let dy = randomIntFromRange(-3, 3);
+        let dx = randomIntFromRange(-3, 3) | 2;
+        let dy = randomIntFromRange(-3, 3) | 2;
         circles.push(new Circle(x, y, radius, '#6af593', dx, dy));
     }
 }
