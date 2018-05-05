@@ -14,6 +14,14 @@ const minRadius = 2;
 const maxRadius = 10;
 const numCircles = 400;
 
+const colors = [
+    '#9C89B8', //LAVENDER PURPLE
+    '#F0A6CA', // CARNATION PINK
+    '#EFC3E6', // CLASSIC ROSE
+    '#F0E6EF', // ISABELLINE
+    '#B8BEDD' // LIGHT STEEL BLUE
+]
+
 // Circle class to creat more circle objects easily later
 class Circle {
     constructor(x, y, radius, color, dx, dy) {
@@ -55,6 +63,10 @@ function randomIntFromRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+function randomColor(colors) {
+    return colors[Math.floor(Math.random() * colors.length)]
+}
+
 // define circle
 let circles;
 
@@ -68,7 +80,7 @@ function init() {
         let y = randomIntFromRange(0 + radius, window.innerHeight - radius);
         let dx = randomIntFromRange(-3, 3) | 2;
         let dy = randomIntFromRange(-3, 3) | 2;
-        circles.push(new Circle(x, y, radius, '#6af593', dx, dy));
+        circles.push(new Circle(x, y, radius, randomColor(colors), dx, dy));
     }
 }
 
