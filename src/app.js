@@ -154,12 +154,16 @@ function init() {
         let x = Math.random() * innerWidth;
         let y = Math.random() * innerHeight;
         let dx = randomIntFromRange(2, 4);
+        
+        let tries = 0;
         for (let j = 0; j < clouds.length; j++) {
             let cloud = clouds[j];
             if (Math.abs(x - cloud.x) < 380 && Math.abs(y - cloud.y) < 200) {
                 x = Math.random() * innerWidth;
                 y = Math.random() * innerHeight;
                 j = -1;
+                tries += 1;
+                if(tries > numClouds) break;
             }
         }
         clouds.push(new Cloud(x, y, randomColor(cloudColors), dx))
