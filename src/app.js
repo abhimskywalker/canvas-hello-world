@@ -11,25 +11,30 @@ canvas.height = window.innerHeight
 
 // Circle class to creat more circle objects easily later
 class Circle {
-    constructor(x, y, radius, color, dx) {
+    constructor(x, y, radius, color, dx, dy) {
         this.x = x;
         this.y = y;
         this.radius = radius;
         this.color = color;
         // x velocity
         this.dx = dx;
+        // y velocity
+        this.dy = dy;
     }
     update() {
         // // if circle's left end corsses right end of the window, we reset it to left of the left end window 
         // if (this.x - this.radius > window.innerWidth) {
         //     this.x = 0 - this.radius;
         // }
-        // Let's make it bounc instead:
-        // Whenever circle touhces the left or right end of window, it reverses velocity
+        // Whenever circle touhces the end of window, it reverses their velocity
         if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
             this.dx = -this.dx;
         }
+        if (this.y + this.radius > innerHeight || this.y - this.radius < 0) {
+            this.dy = -this.dy;
+        }
         this.x = this.x + this.dx;
+        this.y = this.y + this.dy;
         this.draw();
     }
     draw() {
@@ -46,7 +51,7 @@ let circle;
 
 // Function to initiate and setup our starting canvas. This is called one time only as below at end of file
 function init() {
-    circle = new Circle(200, 200, 50, '#6af593', 3);
+    circle = new Circle(200, 200, 50, '#6af593', 3, 2);
     circle.draw();
 }
 
