@@ -22,6 +22,24 @@ const colors = [
     '#B8BEDD' // LIGHT STEEL BLUE
 ]
 
+// Variables
+const mouse = {
+    x: innerWidth / 2,
+    y: innerHeight / 2
+}
+
+// Event Listeners
+addEventListener('mousemove', event => {
+    mouse.x = event.clientX
+    mouse.y = event.clientY
+})
+
+addEventListener('resize', () => {
+    canvas.width = innerWidth
+    canvas.height = innerHeight
+    init()
+})
+
 // Circle class to creat more circle objects easily later
 class Circle {
     constructor(x, y, radius, color, dx, dy) {
