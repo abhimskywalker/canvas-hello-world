@@ -26,5 +26,28 @@ class Circle {
     }
 }
 
-let circle = new Circle(200, 200, 50, '#6af593');
-circle.draw();
+// define circle
+let circle;
+
+// Function to initiate and setup our starting canvas. This is called one time only as below at end of file
+function init() {
+    circle = new Circle(200, 200, 50, '#6af593');
+    circle.draw();
+}
+
+// Animation Loop
+function animate() {
+    // This is what initiates teh loop for animation to run
+    requestAnimationFrame(animate)
+    // Next we clear the canvas to start fresh
+    c.clearRect(0, 0, canvas.width, canvas.height)
+
+    // We move the centre x by 1
+    circle.x += 1;
+    // Next we draw this moved circle on canvas
+    circle.draw();
+}
+
+// Initiate setup of canvas
+init();
+animate();
