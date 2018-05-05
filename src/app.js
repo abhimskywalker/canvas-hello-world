@@ -11,8 +11,9 @@ canvas.height = window.innerHeight
 
 // Some constants
 const minRadius = 2;
-const maxRadius = 10;
-const numCircles = 400;
+const maxRadius = 5;
+let numCircles = Math.floor(window.innerHeight / 2 + window.innerWidth / 2);
+console.log("numCircles", numCircles);
 
 const colors = [
     '#9C89B8', //LAVENDER PURPLE
@@ -37,6 +38,8 @@ addEventListener('mousemove', event => {
 addEventListener('resize', () => {
     canvas.width = innerWidth
     canvas.height = innerHeight
+    numCircles = Math.floor(window.innerHeight / 2 + window.innerWidth / 2);
+    console.log("numCircles", numCircles);
     init()
 })
 
@@ -63,6 +66,13 @@ class Circle {
         if (this.y + this.radius > innerHeight || this.y - this.radius < 0) {
             this.dy = -this.dy;
         }
+        // Enlarge if mouse narby, else reset to original rnage radius
+        if (Math.abs(this.x - mouse.x) < 40 && Math.abs(this.y - mouse.y) < 40) {
+            this.radius = maxRadius * 5;
+        } else if (this.radius > maxRadius) {
+            this.radius = randomIntFromRange(minRadius, maxRadius);
+        }
+
         this.x = this.x + this.dx;
         this.y = this.y + this.dy;
         this.draw();
@@ -113,7 +123,7 @@ function animate() {
     circles.forEach(circle => {
         circle.update();
     });
-    
+
 }
 
 // Initiate setup of canvas
