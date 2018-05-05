@@ -26,6 +26,7 @@ const colors = [
     '#F0E6EF', // ISABELLINE
     '#B8BEDD' // LIGHT STEEL BLUE
 ]
+const cloudColors = ["#E7F2F4", '#c8d1f3', '#A2D2DC']
 
 // Variables
 const mouse = {
@@ -90,6 +91,31 @@ class Circle {
     }
 }
 
+// Cloud
+class Cloud {
+    constructor(x, y, color, dx, dy = 0) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.dx = dx | 1;
+        this.dy = dy;
+        this.length = 350;
+    }
+    draw() {
+        b.beginPath();
+        b.fillStyle = this.color;
+        // This shape was achieved by hit and trial by combining shapes of 4 circles and a rectangle base.
+        // To see the exact process, execute each one below one by one and call `b.fill()` after every arc.
+        b.arc(this.x + 0, this.y + 60, 40, 0, Math.PI * 2, false);
+        b.arc(this.x + 50, this.y + 20, 60, 0, Math.PI * 2, false);
+        b.arc(this.x + 150, this.y + 0, 100, 0, Math.PI * 2, false);
+        b.arc(this.x + 270, this.y + 30, 70, 0, Math.PI * 2, false);
+        b.fillRect(this.x, this.y + 20, 270, 80);
+        b.fill();
+        b.closePath();
+    }
+}
+
 // Utility functions:
 function randomIntFromRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -101,6 +127,7 @@ function randomColor(colors) {
 
 // define circle
 let circles;
+let cloud;
 
 // Function to initiate and setup our starting canvas. This is called one time only as below at end of file
 function init() {
@@ -114,6 +141,8 @@ function init() {
         let dy = randomIntFromRange(-3, 3) | 2;
         circles.push(new Circle(x, y, radius, randomColor(colors), dx, dy));
     }
+    cloud = new Cloud(window.innerWidth/2, window.innerHeight/2, cloudColors[1], 0);
+    cloud.draw();
 }
 
 // Animation Loop
@@ -121,8 +150,7 @@ function animate() {
     // This is what initiates teh loop for animation to run
     requestAnimationFrame(animate)
     // Next we clear the canvas to start fresh
-    c.clearRect(0, 0, canvas.width, canvas.height)
-
+    c.clearRect(0, 0, canvas.width, canvas.height);
     // for each circle we update it's position in next frame
     circles.forEach(circle => {
         circle.update();
