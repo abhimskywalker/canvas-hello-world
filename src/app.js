@@ -20,9 +20,14 @@ class Circle {
         this.dx = dx;
     }
     update() {
-        // if circle's left end corsses right end of the window, we reset it to left of the left end window 
-        if (this.x - this.radius > window.innerWidth) {
-            this.x = 0 - this.radius;
+        // // if circle's left end corsses right end of the window, we reset it to left of the left end window 
+        // if (this.x - this.radius > window.innerWidth) {
+        //     this.x = 0 - this.radius;
+        // }
+        // Let's make it bounc instead:
+        // Whenever circle touhces the left or right end of window, it reverses velocity
+        if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
+            this.dx = -this.dx;
         }
         this.x = this.x + this.dx;
         this.draw();
