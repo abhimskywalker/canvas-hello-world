@@ -9,25 +9,22 @@ const c = canvas.getContext('2d')
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
-// // begin drawing a path
-// c.beginPath();
-// // move to a starting point without drawing anything
-// c.moveTo(100,100);
-// // define a path line from starting point (x:100, y:100) to another point(x:300, y:100)
-// c.lineTo(300,100);
-// // actually draw the stroke of the path
-// c.stroke();
-// // close the path
-// c.closePath();
+// Circle class to creat more circle objects easily later
+class Circle {
+    constructor(x, y, radius, color) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.color = color;
+    }
+    draw() {
+        c.beginPath();
+        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        c.fillStyle = this.color;
+        c.fill();
+        c.closePath();
+    }
+}
 
-// Time to draw a circle this time:
-c.beginPath();
-// Define an arc of a circle with center at point(x:200, y:200) with radius of 50px
-// arc starts from 0 degree to full 2*pie angle, thus creating a full circle
-c.arc(200, 200, 50, 0, Math.PI * 2, false);
-// assign color to fill with a hexcode. Default if black fill
-c.fillStyle = "#6af593";
-// actually fill the path
-c.fill();
-c.closePath();
-
+let circle = new Circle(200, 200, 50, '#6af593');
+circle.draw();
